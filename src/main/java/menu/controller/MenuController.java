@@ -2,6 +2,7 @@ package menu.controller;
 
 import java.util.List;
 import menu.domain.Coaches;
+import menu.dto.ResultHeader;
 import menu.util.Parser;
 import menu.view.InputView;
 import menu.view.OutputView;
@@ -23,6 +24,10 @@ public class MenuController {
         for (String coachName : coachNames) {
             readHateMenu(coachName);
         }
+
+        ResultHeader result = coaches.startLottery();
+
+        outputView.printResult(result);
 
     }
 
