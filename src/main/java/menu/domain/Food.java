@@ -3,6 +3,7 @@ package menu.domain;
 import static menu.domain.Category.*;
 
 import java.util.Arrays;
+import java.util.List;
 import menu.message.ErrorMessage;
 
 public enum Food {
@@ -69,5 +70,20 @@ public enum Food {
                 .filter(food -> food.name.equals(foodName))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.FOOD_NOT_FOUND.getMessage()));
+    }
+
+    public static List<String> getFoodByCategory(Category category) {
+        return Arrays.stream(values())
+                .filter(food -> food.category.equals(category))
+                .map(food -> food.name)
+                .toList();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 }
