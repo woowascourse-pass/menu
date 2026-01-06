@@ -14,9 +14,18 @@ public class Coaches {
     public List<String> createCoaches(List<String> coachNames) {
         validateCoachesNumber(coachNames);
         for (String coachName : coachNames) {
+            validateDuplicateName(coachName);
             coaches.add(new Coach(coachName));
         }
         return List.copyOf(coachNames);
+    }
+
+    private void validateDuplicateName(String coachName) {
+        boolean match = coaches.stream().anyMatch(coach -> coach.equalsName(coachName));
+        if (match) {
+            coaches.clear();
+            throw new IllegalArgumentException(ErrorMessage.COACH_NAME_DUPLICATE.getMessage());
+        }
     }
 
     private void validateCoachesNumber(List<String> coachNames) {
