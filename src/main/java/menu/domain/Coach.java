@@ -49,7 +49,7 @@ public class Coach {
     }
 
     private void validateHateFood(List<String> hateFoodNames) {
-        if (hateFoodNames.size() > 3) {
+        if (hateFoodNames.size() > 2) {
             throw new IllegalArgumentException(ErrorMessage.HATE_FOOD_OUT_OF_RANGE.getMessage());
         }
     }
