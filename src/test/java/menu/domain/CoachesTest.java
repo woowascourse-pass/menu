@@ -1,6 +1,7 @@
 package menu.domain;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -68,11 +69,29 @@ class CoachesTest {
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("[ERROR] 코치 이름은 중복될 수 없습니다.");
         }
+
+        @DisplayName("못 먹는 음식 개수 2개 초과할 경우")
+        @Test
+        public void 못_먹는_음식_2개_초과_테스트() {
+            //given
+            coaches.createCoaches(List.of("토미", "제임스"));
+            //when
+            //then
+            assertThatThrownBy(() -> coaches.addHateMenu("토미", List.of("규동", "우동", "미소시루")))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("[ERROR] 못 먹는 음식은 0개 ~ 2개까지만 선택 가능합니다.");
+        }
     }
 
     @DisplayName("성공")
     @Nested
     class Success {
+
+        static Stream<Arguments> generateHateFood() {
+            return Stream.of(
+                    Arguments.of(List.of("우동", "규동"), List.of("우동"), List.of())
+            );
+        }
 
         @DisplayName("코치 인원 정상일 경우")
         @Test
@@ -82,6 +101,24 @@ class CoachesTest {
             //when
             //then
             Assertions.assertThat(coachNames).containsExactly("토미", "제임스", "포코");
+        }
+
+        @DisplayName("못 먹는 음식 개수 정상일 경우")
+        @ParameterizedTest
+        @MethodSource("generateHateFood")
+        public void 못_먹는_음식_개수_정상_테스트(List<String> data1, List<String> data2, List<String> data3) {
+            //given
+            List<String> coachNames = coaches.createCoaches(List.of("토미", "제임스", "포코"));
+            //when
+            coaches.addHateMenu("토미", data1);
+            coaches.addHateMenu("제임스", data2);
+            coaches.addHateMenu("포코", data3);
+            //then
+            assertDoesNotThrow(() -> {
+                coaches.addHateMenu("토미", data1);
+                coaches.addHateMenu("제임스", data2);
+                coaches.addHateMenu("포코", data3);
+            });
         }
     }
 
