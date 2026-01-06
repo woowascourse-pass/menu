@@ -6,6 +6,7 @@ public enum ErrorMessage {
     HATE_FOOD_OUT_OF_RANGE("[ERROR] 못 먹는 음식은 0개 ~ 2개까지만 선택 가능합니다."),
     FOOD_NOT_FOUND("[ERROR] 존재하지 않는 음식입니다."),
     COACH_NOT_FOUND("[ERROR] 존재하지 않는 코치입니다."),
+    CATEGORY_NOT_FOUND("[ERROR] 존재하지 않는 카테고리입니다."),
     ;
 
     private final String description;
