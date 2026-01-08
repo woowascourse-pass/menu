@@ -26,7 +26,6 @@ public class InputView {
         System.out.println();
         System.out.println(name + "(이)가 못 먹는 메뉴를 입력해 주세요.");
         String raw = Console.readLine().trim();
-        validateBlank(raw);
 
         List<String> tokens = Parser.parseByDelimiter(raw);
 
