@@ -32,7 +32,7 @@ public class MenuService {
             menuNames.add(menu.getName());
         }
         // 코치 별 메뉴 추천
-        List<CoachResponse> coachResponses = recommendationEachCoach(coaches, menuNames);
+        List<CoachResponse> coachResponses = recommendationEachCoach(coaches, menuNames, categories);
 
 
         return new RecommendationResultResponse(
@@ -41,11 +41,11 @@ public class MenuService {
         );
     }
 
-    private List<CoachResponse> recommendationEachCoach(Coaches coaches, List<String> menuNames) {
+    private List<CoachResponse> recommendationEachCoach(Coaches coaches, List<String> menuNames, Categories categories) {
         List<CoachResponse> coachResponses = new ArrayList<>();
         // 코치 순회
         for (Coach coach : coaches.coaches()) {
-            List<String> recommendedMenuNames = recommendedMenuNames(menuNames, coach);
+            List<String> recommendedMenuNames = recommendedMenuNames(menuNames, coach, categories);
             coachResponses.add(
                     new CoachResponse(
                             coach.name(),
@@ -55,18 +55,23 @@ public class MenuService {
         } return coachResponses;
     }
 
-    private List<String> recommendedMenuNames(List<String> menuNames, Coach coach) {
+    private List<String> recommendedMenuNames(List<String> menuNames, Coach coach, Categories categories) {
         List<String> recommendedMenuNames = new ArrayList<>();
-        for (int i = 0; i < 5; i++) { // 요일 순회
-            String menuName = recommendationMenu(menuNames, coach, recommendedMenuNames);
+        for (Category category: categories.getCategories()) {
+            String menuName = recommendationMenu(menuNames, coach, recommendedMenuNames, category);
             recommendedMenuNames.add(menuName);
         }
         return recommendedMenuNames;
     }
 
-    private String recommendationMenu(List<String> menuNames, Coach coach, List<String> recommendedMenuNames) {
+    private String recommendationMenu(List<String> menuNames, Coach coach, List<String> recommendedMenuNames, Category category) {
         while (true){
             String menuName = Randoms.shuffle(menuNames).get(0);
+            Menu menu = menus.findByName(menuName);
+            if (!category.equals(menu.getCategory())) {
+                continue;
+            }
+
             if (recommendedMenuNames.contains(menuName)){
                 continue;
             }
