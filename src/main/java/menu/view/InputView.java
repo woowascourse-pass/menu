@@ -7,6 +7,8 @@ import menu.util.Parser;
 
 import java.util.List;
 
+import static menu.view.OutputView.PREFIX_ERROR;
+
 public class InputView {
 
     public CoachNamesRequest readCoachNames() {
@@ -33,7 +35,7 @@ public class InputView {
 
     private void validateBlank(String input) {
         if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException("입력이 비었어요.");
+            throw new IllegalArgumentException(PREFIX_ERROR + "입력이 비었어요.");
         }
     }
 }
