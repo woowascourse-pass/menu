@@ -41,7 +41,7 @@ public class OutputView {
     private void printCategory(Categories categories) {
         StringBuilder sb = new StringBuilder("[ 카테고리");
         for (Category category: categories.getCategories()) {
-            sb.append(" | ").append(category.name());
+            sb.append(" | ").append(category.toKorean());
         }
         sb.append(" ]");
         System.out.println(sb);
