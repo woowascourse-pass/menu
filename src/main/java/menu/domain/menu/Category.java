@@ -1,5 +1,9 @@
 package menu.domain.menu;
 
+import java.time.DateTimeException;
+
+import static menu.view.OutputView.PREFIX_ERROR;
+
 public enum Category {
     Japan("일식"),
     Korean("한식"),
@@ -22,7 +26,21 @@ public enum Category {
         return ENUMS[index - 1];
     }
 
+    public static Category fromKorean(String value) {
+        String trimmed = value.trim();
+        for (Category category : ENUMS) {
+            if (category.korean.equals(trimmed)) {
+                return category;
+            }
+        }
+        throw new IllegalArgumentException(PREFIX_ERROR + "Invalid value for Category: " + value);
+    }
+
     public String toKorean() {
         return korean;
+    }
+
+    public boolean equals(Category category) {
+        return category == this;
     }
 }
