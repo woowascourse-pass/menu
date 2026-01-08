@@ -1,7 +1,5 @@
 package menu.domain.menu;
 
-import java.time.DateTimeException;
-
 import static menu.view.OutputView.PREFIX_ERROR;
 
 public enum Category {
