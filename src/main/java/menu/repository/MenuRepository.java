@@ -1,5 +1,6 @@
 package menu.repository;
 
+import menu.domain.menu.Category;
 import menu.domain.menu.Menu;
 import menu.util.Parser;
 import menu.util.ResourceReader;
@@ -39,6 +40,6 @@ public class MenuRepository {
             throw new IllegalStateException("[ERROR] 파일 형식 오류");
         }
 
-        return new Menu(parts.get(0), parts.get(1));
+        return new Menu(parts.get(0), Category.fromKorean(parts.get(1)));
     }
 }
