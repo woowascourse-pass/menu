@@ -8,4 +8,8 @@ public class Menus {
     public Menus(List<Menu> menus) {
         this.menus = menus;
     }
+
+    public List<Menu> getMenus() {
+        return menus;
+    }
 }
