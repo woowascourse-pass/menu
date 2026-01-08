@@ -13,7 +13,7 @@ public class InputView {
 
     public CoachNamesRequest readCoachNames() {
         System.out.println();
-        System.out.print("코치의 이름을 입력해 주세요. (, 로 구분)");
+        System.out.println("코치의 이름을 입력해 주세요. (, 로 구분)");
         String raw = Console.readLine().trim();
         validateBlank(raw);
 
@@ -24,7 +24,7 @@ public class InputView {
 
     public AllergyMenuNamesRequest readAllergy(String name) {
         System.out.println();
-        System.out.print(name + "(이)가 못 먹는 메뉴를 입력해 주세요.");
+        System.out.println(name + "(이)가 못 먹는 메뉴를 입력해 주세요.");
         String raw = Console.readLine().trim();
         validateBlank(raw);
 
