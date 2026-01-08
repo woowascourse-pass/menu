@@ -2,6 +2,7 @@ package menu.controller;
 
 import menu.domain.Coach.Coach;
 import menu.domain.Coach.Coaches;
+import menu.dto.request.AllergyMenuNamesRequest;
 import menu.dto.request.CoachNamesRequest;
 import menu.dto.response.RecommendationResultResponse;
 import menu.service.MenuService;
@@ -44,8 +45,8 @@ public class MenuController {
     private Coach readAllergyMenu(String coachName) {
         while (true) {
             try {
-                List<String> allergyMenuNames = inputView.readAllergy(coachName);
-                return new Coach(coachName, allergyMenuNames);
+                AllergyMenuNamesRequest allergyMenuNames = inputView.readAllergy(coachName);
+                return new Coach(coachName, allergyMenuNames.allergyMenuNames());
             } catch (IllegalArgumentException e) {
                 outputView.printError(PREFIX_ERROR + e.getMessage());
             }
