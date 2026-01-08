@@ -1,6 +1,7 @@
 package menu.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import menu.dto.request.AllergyMenuNamesRequest;
 import menu.dto.request.CoachNamesRequest;
 import menu.util.Parser;
 
@@ -19,7 +20,7 @@ public class InputView {
         return new CoachNamesRequest(tokens);
     }
 
-    public List<String> readAllergy(String name) {
+    public AllergyMenuNamesRequest readAllergy(String name) {
         System.out.println();
         System.out.print(name + "(이)가 못 먹는 메뉴를 입력해 주세요.");
         String raw = Console.readLine().trim();
@@ -27,7 +28,7 @@ public class InputView {
 
         List<String> tokens = Parser.parseByDelimiter(raw);
 
-        return tokens;
+        return new AllergyMenuNamesRequest(tokens);
     }
 
     private void validateBlank(String input) {
