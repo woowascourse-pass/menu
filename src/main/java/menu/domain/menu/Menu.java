@@ -2,9 +2,9 @@ package menu.domain.menu;
 
 public class Menu {
     private final String name;
-    private final String category;
+    private final Category category;
 
-    public Menu(String name, String category) {
+    public Menu(String name, Category category) {
         this.name = name;
         this.category = category;
     }
@@ -13,7 +13,7 @@ public class Menu {
         return name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 }
