@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MenuRepository {
     private static final int FIELD_SIZE = 2;
-    private static final String DEFAULT_PATH = "menus.md";
+    private static final String DEFAULT_PATH = "menu.md";
 
     public MenuRepository() {
     }
