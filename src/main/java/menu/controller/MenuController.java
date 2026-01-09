@@ -2,6 +2,7 @@ package menu.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import menu.domain.Category;
 import menu.domain.Coach;
 import menu.service.MenuService;
 import menu.util.Parser;
@@ -20,6 +21,8 @@ public class MenuController {
         outputView.printStartMessage();
         List<Coach> coaches = inputCoachNames();
         inputNoMenusAllCoaches(coaches);
+        List<Category> categories = menuService.recommendMenus(coaches);
+        outputView.printRecommendedResult(categories, coaches);
     }
 
     private List<Coach> inputCoachNames() {
@@ -61,4 +64,5 @@ public class MenuController {
             }
         }
     }
+
 }

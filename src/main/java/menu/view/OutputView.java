@@ -15,10 +15,10 @@ public class OutputView {
         for (int i = 0; i < categories.size(); i++) {
             System.out.printf("%s ", categories.get(i).getName());
             if (i + 1 == categories.size()) {
-                System.out.print("]");
+                System.out.println("]");
                 break;
             }
-            System.out.println("| ");
+            System.out.print("| ");
         }
         for (Coach coach : coaches) {
             System.out.println(coach.format());
@@ -27,7 +27,7 @@ public class OutputView {
     }
 
     private void printRecommendedResultMessage() {
-        System.out.println("메뉴 추천 결과입니다.");
+        System.out.println("\n메뉴 추천 결과입니다.");
         System.out.println("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]");
         System.out.print("[ 카테고리 | ");
     }

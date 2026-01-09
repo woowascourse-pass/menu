@@ -23,4 +23,23 @@ public enum Category {
     public String getName() {
         return name;
     }
+
+    public static Category of(int categoryId) {
+        if (categoryId == 1) {
+            return JAPANESE;
+        }
+        if (categoryId == 2) {
+            return KOREAN;
+        }
+        if (categoryId == 3) {
+            return CHINESE;
+        }
+        if (categoryId == 4) {
+            return ASIAN;
+        }
+        if (categoryId == 5) {
+            return WESTERN;
+        }
+        return null;
+    }
 }

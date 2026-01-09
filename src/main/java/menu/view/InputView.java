@@ -11,7 +11,7 @@ public class InputView {
     }
 
     public String inputNoFoods(String name) {
-        System.out.printf("%s(이)가 못 먹는 메뉴를 입력해 주세요.\n", name);
+        System.out.printf("\n%s(이)가 못 먹는 메뉴를 입력해 주세요.\n", name);
         return Parser.removeAllSpaces(Console.readLine());
     }
 }

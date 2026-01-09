@@ -43,7 +43,7 @@ public class MenuRepository {
     }
 
     public List<String> find(Integer key) {
-        return storage.get(key);
+        return new ArrayList<>(storage.get(key));
     }
 
     public Map<Integer, List<String>> findAll() {
@@ -66,4 +66,5 @@ public class MenuRepository {
         }
         return allMenus;
     }
+
 }
