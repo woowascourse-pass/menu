@@ -23,7 +23,6 @@ public class NoMenusValidator {
 
     private static void isExistedMenu(String menu, List<String> allMenus) {
         if (!allMenus.contains(menu)) {
-            System.out.println("[debug] " + menu);
             throw new IllegalArgumentException(
                 ErrorMessage.NO_FOOD_NOT_FOUND_ERROR_MESSAGE.getMessage());
         }

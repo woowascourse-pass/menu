@@ -22,6 +22,13 @@ public class MenuService {
         }
     }
 
+    public List<Coach> convertCoach(List<String> names) {
+        List<Coach> coaches = new ArrayList<>();
+        for (String name : names) {
+            coaches.add(new Coach(name));
+        }
+        return coaches;
+    }
 
     public List<Category> recommendMenus(List<Coach> coaches) {
         List<Category> categories = new ArrayList<>();
@@ -30,15 +37,7 @@ public class MenuService {
             if (isPossible(categories, pickedCategory)) {
                 categories.add(pickedCategory);
             }
-            for (Coach coach : coaches) {
-                while (true) {
-                    String menu = recommendMenu(pickedCategory);
-                    if (coach.canEat(menu)) {
-                        coach.addMenus(menu);
-                        break;
-                    }
-                }
-            }
+            recommendCoaches(pickedCategory, coaches);
         }
         return categories;
     }
@@ -54,5 +53,21 @@ public class MenuService {
 
     private boolean isPossible(List<Category> categories, Category category) {
         return Collections.frequency(categories, category) < 2;
+    }
+
+    private void recommendCoaches(Category category, List<Coach> coaches) {
+        for (Coach coach : coaches) {
+            recommendCoach(category, coach);
+        }
+    }
+
+    private void recommendCoach(Category category, Coach coach) {
+        while (true) {
+            String menu = recommendMenu(category);
+            if (coach.canEat(menu)) {
+                coach.addMenus(menu);
+                return;
+            }
+        }
     }
 }

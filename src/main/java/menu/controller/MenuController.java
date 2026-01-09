@@ -1,6 +1,5 @@
 package menu.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import menu.domain.Category;
 import menu.domain.Coach;
@@ -31,20 +30,13 @@ public class MenuController {
                 String input = inputView.inputCoach();
                 CoachNameValidator.validate(input);
                 List<String> names = Parser.parseInput(input, ",");
-                return convertCoach(names);
+                return menuService.convertCoach(names);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    private List<Coach> convertCoach(List<String> names) {
-        List<Coach> coaches = new ArrayList<>();
-        for (String name : names) {
-            coaches.add(new Coach(name));
-        }
-        return coaches;
-    }
 
     private void inputNoMenusAllCoaches(List<Coach> coaches) {
         for (Coach coach : coaches) {
