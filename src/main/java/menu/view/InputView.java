@@ -9,4 +9,9 @@ public class InputView {
         System.out.println("코치의 이름을 입력해 주세요. (, 로 구분)");
         return Parser.removeAllSpaces(Console.readLine());
     }
+
+    public String inputNoFoods(String name) {
+        System.out.printf("%s(이)가 못 먹는 메뉴를 입력해 주세요.\n", name);
+        return Parser.removeAllSpaces(Console.readLine());
+    }
 }
