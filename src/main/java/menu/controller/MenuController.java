@@ -7,7 +7,7 @@ import menu.domain.Coach;
 import menu.service.MenuService;
 import menu.util.Parser;
 import menu.validator.CoachNameValidator;
-import menu.validator.NoFoodsValidator;
+import menu.validator.NoMenusValidator;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -57,12 +57,11 @@ public class MenuController {
         while (true) {
             try {
                 String input = inputView.inputNoFoods(coach.getName());
-                NoFoodsValidator.validate(input, menuService.getAllMenus());
+                NoMenusValidator.validate(input, menuService.getAllMenus());
                 return Parser.parseInput(input, ",");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
-
 }
