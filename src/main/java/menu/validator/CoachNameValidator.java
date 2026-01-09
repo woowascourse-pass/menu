@@ -17,7 +17,7 @@ public class CoachNameValidator {
         validateCoachCount(inputs);
     }
 
-    private static void validateCoachName(String name) {
+    public static void validateCoachName(String name) {
         if (!(2 <= name.length() && name.length() <= 4)) {
             throw new IllegalArgumentException(
                 ErrorMessage.COACH_NAME_LENGTH_ERROR_MESSAGE.getMessage());

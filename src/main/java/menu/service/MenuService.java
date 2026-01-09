@@ -18,7 +18,7 @@ public class MenuService {
 
     public void addNoMenus(Coach coach, List<String> menus) {
         for (String menu : menus) {
-            coach.addNoMenus(menu);
+            coach.addNoMenu(menu);
         }
     }
 
@@ -65,7 +65,7 @@ public class MenuService {
         while (true) {
             String menu = recommendMenu(category);
             if (coach.canEat(menu)) {
-                coach.addMenus(menu);
+                coach.addMenu(menu);
                 return;
             }
         }
