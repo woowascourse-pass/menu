@@ -1,14 +1,21 @@
 package menu.validator;
 
 import java.util.List;
+import menu.constant.MenuConstant;
 import menu.message.ErrorMessage;
 import menu.util.Parser;
 
 public class CoachNameValidator {
 
+    private static final int COACH_NAME_MIN_LENGTH = 2;
+    private static final int COACH_NAME_MAX_LENGTH = 4;
+    private static final int COACH_MIN_COUNT = 2;
+    private static final int COACH_MAX_COUNT = 5;
+
+
     public static void validate(String input) {
         InputValidator.requireNotBlank(input, ErrorMessage.BLANK_ERROR_MESSAGE.getMessage());
-        List<String> inputs = Parser.parseInput(input, ",");
+        List<String> inputs = Parser.parseInput(input, MenuConstant.DELIMITER);
         for (String name : inputs) {
             validateCoachName(name);
         }
@@ -18,18 +25,18 @@ public class CoachNameValidator {
     }
 
     public static void validateCoachName(String name) {
-        if (!(2 <= name.length() && name.length() <= 4)) {
+        if (!(COACH_NAME_MIN_LENGTH <= name.length() && name.length() <= COACH_NAME_MAX_LENGTH)) {
             throw new IllegalArgumentException(
                 ErrorMessage.COACH_NAME_LENGTH_ERROR_MESSAGE.getMessage());
         }
     }
 
     private static void validateCoachCount(List<String> names) {
-        if (names.size() < 2) {
+        if (names.size() < COACH_MIN_COUNT) {
             throw new IllegalArgumentException(
                 ErrorMessage.COACH_COUNT_UNDER_ERROR_MESSAGE.getMessage());
         }
-        if (5 < names.size()) {
+        if (COACH_MAX_COUNT < names.size()) {
             throw new IllegalArgumentException(
                 ErrorMessage.COACH_COUNT_OVER_ERROR_MESSAGE.getMessage());
         }

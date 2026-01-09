@@ -4,11 +4,15 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import menu.constant.RandomConstant;
 import menu.domain.Category;
 import menu.domain.Coach;
 import menu.repository.MenuRepository;
 
 public class MenuService {
+
+    private static final int NO_MENUS_MAX = 2;
+    private static final int WEEK_LENGTH = 5;
 
     public MenuService(MenuRepository menuRepository) {
         this.menuRepository = menuRepository;
@@ -36,7 +40,7 @@ public class MenuService {
 
     public List<Category> recommendMenus(List<Coach> coaches) {
         List<Category> categories = new ArrayList<>();
-        while (categories.size() < 5) {
+        while (categories.size() < WEEK_LENGTH) {
             Category pickedCategory = pickCategory();
             if (isPossible(categories, pickedCategory)) {
                 categories.add(pickedCategory);
@@ -47,16 +51,18 @@ public class MenuService {
     }
 
     private Category pickCategory() {
-        int categoryId = Randoms.pickNumberInRange(1, 5);
+        int categoryId = Randoms.pickNumberInRange(RandomConstant.MIN_VALUE,
+            RandomConstant.MAX_VALUE);
         return Category.of(categoryId);
     }
 
     private String recommendMenu(Category category) {
-        return Randoms.shuffle(menuRepository.find(category.getId())).get(0);
+        return Randoms.shuffle(menuRepository.find(category.getId()))
+            .get(RandomConstant.PICK_INDEX);
     }
 
     private boolean isPossible(List<Category> categories, Category category) {
-        return Collections.frequency(categories, category) < 2;
+        return Collections.frequency(categories, category) < NO_MENUS_MAX;
     }
 
     private void recommendCoaches(Category category, List<Coach> coaches) {

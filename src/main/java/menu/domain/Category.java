@@ -1,12 +1,13 @@
 package menu.domain;
 
+import java.util.List;
+
 public enum Category {
     JAPANESE(1, "일식"),
     KOREAN(2, "한식"),
     CHINESE(3, "중식"),
     ASIAN(4, "아시안"),
     WESTERN(5, "양식");
-
 
     private final int id;
     private final String name;
@@ -25,21 +26,10 @@ public enum Category {
     }
 
     public static Category of(int categoryId) {
-        if (categoryId == 1) {
-            return JAPANESE;
+        if (!(1 <= categoryId && categoryId <= 5)) {
+            return null;
         }
-        if (categoryId == 2) {
-            return KOREAN;
-        }
-        if (categoryId == 3) {
-            return CHINESE;
-        }
-        if (categoryId == 4) {
-            return ASIAN;
-        }
-        if (categoryId == 5) {
-            return WESTERN;
-        }
-        return null;
+        List<Category> categories = List.of(JAPANESE, KOREAN, CHINESE, ASIAN, WESTERN);
+        return categories.get(categoryId - 1);
     }
 }

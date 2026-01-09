@@ -1,6 +1,7 @@
 package menu.controller;
 
 import java.util.List;
+import menu.constant.MenuConstant;
 import menu.domain.Category;
 import menu.domain.Coach;
 import menu.service.MenuService;
@@ -36,7 +37,7 @@ public class MenuController {
             try {
                 String input = inputView.inputCoach();
                 CoachNameValidator.validate(input);
-                List<String> names = Parser.parseInput(input, ",");
+                List<String> names = Parser.parseInput(input, MenuConstant.DELIMITER);
                 return menuService.convertCoach(names);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -57,7 +58,7 @@ public class MenuController {
             try {
                 String input = inputView.inputNoMenus(coach.getName());
                 NoMenusValidator.validate(input, menuService.getAllMenus());
-                return Parser.parseInput(input, ",");
+                return Parser.parseInput(input, MenuConstant.DELIMITER);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

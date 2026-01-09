@@ -1,6 +1,7 @@
 package menu.validator;
 
 import java.util.List;
+import menu.constant.MenuConstant;
 import menu.message.ErrorMessage;
 import menu.util.Parser;
 
@@ -10,7 +11,7 @@ public class NoMenusValidator {
         if (input.isEmpty()) {
             return;
         }
-        List<String> menus = Parser.parseInput(input, ",");
+        List<String> menus = Parser.parseInput(input, MenuConstant.DELIMITER);
         for (String menu : menus) {
             InputValidator.requireNotBlank(menu,
                 ErrorMessage.NO_FOOD_NOT_FOUND_ERROR_MESSAGE.getMessage());
