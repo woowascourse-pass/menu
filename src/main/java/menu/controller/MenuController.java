@@ -55,7 +55,7 @@ public class MenuController {
     private List<String> inputNoFoods(Coach coach) {
         while (true) {
             try {
-                String input = inputView.inputNoFoods(coach.getName());
+                String input = inputView.inputNoMenus(coach.getName());
                 NoMenusValidator.validate(input, menuService.getAllMenus());
                 return Parser.parseInput(input, ",");
             } catch (IllegalArgumentException e) {
