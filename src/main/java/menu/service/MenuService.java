@@ -10,7 +10,11 @@ import menu.repository.MenuRepository;
 
 public class MenuService {
 
-    private final MenuRepository menuRepository = new MenuRepository();
+    public MenuService(MenuRepository menuRepository) {
+        this.menuRepository = menuRepository;
+    }
+
+    private final MenuRepository menuRepository;
 
     public List<String> getAllMenus() {
         return menuRepository.getAllMenus();

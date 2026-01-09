@@ -2,6 +2,7 @@ package menu.validator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import menu.config.AppConfig;
 import menu.message.ErrorMessage;
 import menu.service.MenuService;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,7 +10,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class NoMenusValidatorTest {
 
-    private final MenuService menuService = new MenuService();
+    private final AppConfig appConfig = new AppConfig();
+    private final MenuService menuService = appConfig.menuService();
 
     @ParameterizedTest
     @ValueSource(strings = {"토마토달걀볶음", "교동", "라면", "선풍기, 동파육", "뇨끼,토스투"})

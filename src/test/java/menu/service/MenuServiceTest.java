@@ -1,6 +1,7 @@
 package menu.service;
 
 import java.util.List;
+import menu.config.AppConfig;
 import menu.domain.Coach;
 import menu.repository.MenuRepository;
 import org.junit.jupiter.api.Assertions;
@@ -9,8 +10,9 @@ import org.junit.jupiter.api.Test;
 
 class MenuServiceTest {
 
-    private final MenuService menuService = new MenuService();
-    private final MenuRepository menuRepository = new MenuRepository();
+    private final AppConfig appConfig = new AppConfig();
+    private final MenuService menuService = appConfig.menuService();
+    private final MenuRepository menuRepository = appConfig.menuRepository();
 
     @Nested
     class getAllMenusTest {
