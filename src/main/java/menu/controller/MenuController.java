@@ -1,8 +1,8 @@
 package menu.controller;
 
 import java.util.List;
-import menu.domain.Coaches;
 import menu.dto.ResultHeader;
+import menu.service.MenuService;
 import menu.util.Parser;
 import menu.view.InputView;
 import menu.view.OutputView;
@@ -11,11 +11,12 @@ public class MenuController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final Coaches coaches = new Coaches();
+    private final MenuService menuService;
 
-    public MenuController(InputView inputView, OutputView outputView) {
+    public MenuController(InputView inputView, OutputView outputView, MenuService menuService) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.menuService = menuService;
     }
 
     public void start() {
@@ -25,7 +26,7 @@ public class MenuController {
             readHateMenu(coachName);
         }
 
-        ResultHeader result = coaches.startLottery();
+        ResultHeader result = menuService.startLottery();
 
         outputView.printResult(result);
 
@@ -36,7 +37,7 @@ public class MenuController {
             try {
                 String rawHateMenu = inputView.readHateMenu(coachName);
                 List<String> hateMenu = Parser.parseHateFoods(rawHateMenu);
-                coaches.addHateMenu(coachName, hateMenu);
+                menuService.addHateMenu(coachName, hateMenu);
                 return;
             } catch (IllegalArgumentException e) {
                 outputView.printError(e.getMessage());
@@ -49,7 +50,7 @@ public class MenuController {
             try {
                 String rawCoaches = inputView.readCoach();
                 List<String> coachNames = Parser.parseCoaches(rawCoaches);
-                return coaches.createCoaches(coachNames);
+                return menuService.createCoaches(coachNames);
             } catch (IllegalArgumentException e) {
                 outputView.printError(e.getMessage());
             }

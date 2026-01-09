@@ -2,7 +2,6 @@ package menu.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import menu.dto.RecommendMenuResult;
 import menu.message.ErrorMessage;
 
 public class Coach {
@@ -68,10 +67,11 @@ public class Coach {
         return false;
     }
 
-    public RecommendMenuResult makeResult() {
-        List<String> foodNames = alreadyEat.stream().map(Food::getName)
-                .toList();
+    public List<String> makeResult() {
+        return alreadyEat.stream().map(Food::getName).toList();
+    }
 
-        return new RecommendMenuResult(name, foodNames);
+    public String getName() {
+        return name;
     }
 }
